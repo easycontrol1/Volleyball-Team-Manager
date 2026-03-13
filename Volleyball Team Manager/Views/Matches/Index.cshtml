@@ -1,0 +1,38 @@
+﻿@model IEnumerable<VolleyballManager.Data.Models.Match>
+
+@{
+    ViewData["Title"] = "Мачове";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">🏆 Календар и Резултати</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        + Добави мач
+    </a>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card shadow-sm h-100 border-0 @(item.IsHomeGame ? "border-start border-4 border-primary" : "border-start border-4 border-warning")">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <span class="badge bg-secondary">@item.Date.ToString("dd MMM")</span>
+                    @if (item.IsHomeGame)
+                    {
+                        <span class="text-primary fw-bold">ДОМАКИН</span>
+                    }
+                    else
+                    {
+                        <span class="text-warning fw-bold">ГОСТ</span>
+                    }
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3">Противник: @item.Opponent</h5>
+                    <div class="display-4 fw-bold text-dark mb-3">@item.Result</div>
+                    <a asp-controller="Statistics" asp-action="Index" asp-route-matchId="@item.Id" class="btn btn-outline-dark btn-sm w-100">Виж статистика</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

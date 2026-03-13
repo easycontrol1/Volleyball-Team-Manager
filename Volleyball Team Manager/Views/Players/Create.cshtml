@@ -1,0 +1,77 @@
+﻿@model VolleyballManager.Data.Models.Player
+
+@{
+    ViewData["Title"] = "Нов Играч";
+}
+
+<h2 class="text-primary mb-3">Регистрация на нов играч</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                Лични данни
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label asp-for="FirstName" class="form-label">Име</label>
+                            <input asp-for="FirstName" class="form-control" />
+                        </div>
+                        <div class="col">
+                            <label asp-for="LastName" class="form-label">Фамилия</label>
+                            <input asp-for="LastName" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label asp-for="ShirtNumber" class="form-label">Номер</label>
+                            <input asp-for="ShirtNumber" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Age" class="form-label">Възраст</label>
+                            <input asp-for="Age" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Position" class="form-label">Позиция</label>
+                            <select asp-for="Position" class="form-select">
+                                <option value="">Избери...</option>
+                                <option value="Setter">Разпределител</option>
+                                <option value="Outside Hitter">Посрещач</option>
+                                <option value="Middle Blocker">Централен</option>
+                                <option value="Opposite">Диагонал</option>
+                                <option value="Libero">Либеро</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-3 mb-3 border-bottom pb-2">Физически данни</h5>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label asp-for="Height" class="form-label">Ръст (см)</label>
+                            <input asp-for="Height" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="WingSpan" class="form-label">Размах (см)</label>
+                            <input asp-for="WingSpan" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="VerticalJump" class="form-label">Скок (см)</label>
+                            <input asp-for="VerticalJump" type="number" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+                        <input type="submit" value="Запиши в отбора" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
