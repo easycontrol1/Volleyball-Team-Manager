@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Volleyball_Team_Manager.Data;
+using VolleyballManager.Data;
+using VolleyballManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+// --- ??????????? ?? ????????? ---
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IMatchService, MatchService>(); // <--- ???? ? ?????? ???
+// ---------------------------------
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +30,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
