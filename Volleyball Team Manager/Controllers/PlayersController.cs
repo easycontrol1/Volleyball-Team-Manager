@@ -36,5 +36,51 @@ namespace VolleyballManager.Controllers
             }
             return View(player);
         }
+
+        // Редакция
+        public IActionResult Edit(int id)
+        {
+            var player = playerService.GetById(id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
+        // Детайли
+
+        public IActionResult Details(int id)
+        {
+            var player = playerService.GetById(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+            return View(player);
+        }
+        // ИЗТРИВАНЕ
+
+        // 1. Показва формата за потвърждение (GET)
+        public IActionResult Delete(int id)
+        {
+            var player = playerService.GetById(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+            return View(player);
+        }
+
+        // 2. Извършва реалното изтриване (POST)
+        [HttpPost]
+        [ActionName("Delete")] // Това казва на ASP.NET да го третира като "Delete" действие
+        public IActionResult DeleteConfirmed(int id)
+        {
+            playerService.DeletePlayer(id);
+            return RedirectToAction("Index");
+        }
     }
 }

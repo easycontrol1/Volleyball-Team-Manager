@@ -1,0 +1,35 @@
+﻿@model VolleyballManager.Data.Models.Player
+
+@{
+    ViewData["Title"] = "Изтриване на играч";
+}
+
+<div class="container mt-5">
+    <div class="alert alert-danger text-center" role="alert">
+        <h3>⚠️ Сигурни ли сте, че искате да изтриете този играч?</h3>
+        <p>Действието е необратимо и ще изтрие всички свързани данни (статистика).</p>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 text-end">Име:</dt>
+                <dd class="col-sm-9">@Model.FirstName @Model.LastName</dd>
+
+                <dt class="col-sm-3 text-end">Номер:</dt>
+                <dd class="col-sm-9">@Model.ShirtNumber</dd>
+                
+                <dt class="col-sm-3 text-end">Позиция:</dt>
+                <dd class="col-sm-9">@Model.Position</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <div class="text-center mt-4">
+                    <input type="submit" value="Да, изтрий го" class="btn btn-danger btn-lg px-5" /> |
+                    <a asp-action="Index" class="btn btn-secondary btn-lg px-5">Отказ</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

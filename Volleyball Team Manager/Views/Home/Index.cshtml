@@ -1,8 +1,77 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Начало";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- HERO SECTION - Големият заглавен банер -->
+<div class="text-center py-5 bg-light border-bottom mb-4">
+    <h1 class="display-4 fw-bold text-primary">🏐 Volleyball Team Manager</h1>
+    <p class="lead text-muted mb-4">Управлявай своя професионален волейболен отбор с лекота.</p>
+    
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a class="btn btn-primary btn-lg px-4 gap-3" asp-controller="Players" asp-action="Create">
+            Добави Играч
+        </a>
+        <a class="btn btn-outline-secondary btn-lg px-4" asp-controller="Matches" asp-action="Create">
+            Нов Мач
+        </a>
+    </div>
+</div>
+
+<!-- КАРТИ ЗА СТАТИСТИКА -->
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card shadow border-0 h-100 bg-primary text-white">
+                <div class="card-body text-center py-5">
+                    <h3 class="card-title">Регистрирани Играчи</h3>
+                    <h1 class="display-1 fw-bold">@ViewBag.PlayersCount</h1>
+                    <p class="card-text">Активни членове на отбора</p>
+                    <a asp-controller="Players" asp-action="Index" class="btn btn-light text-primary fw-bold mt-3">Виж всички</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card shadow border-0 h-100 bg-success text-white">
+                <div class="card-body text-center py-5">
+                    <h3 class="card-title">Изиграни Мачове</h3>
+                    <h1 class="display-1 fw-bold">@ViewBag.MatchesCount</h1>
+                    <p class="card-text">Събития в календара</p>
+                    <a asp-controller="Matches" asp-action="Index" class="btn btn-light text-success fw-bold mt-3">Виж календара</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СЕКЦИЯ ЗА ПОСЛЕДЕН МАЧ (ако има) -->
+    @if (ViewBag.LastMatch != null)
+    {
+        <div class="card shadow-sm mb-5">
+            <div class="card-header bg-warning text-dark d-flex justify-content-between">
+                <span>🏆 Последен мач</span>
+                <span>@ViewBag.LastMatch.Date.ToString("dd MMM yyyy")</span>
+            </div>
+            <div class="card-body text-center py-4">
+                <h3 class="fw-bold text-secondary mb-3">@ViewBag.LastMatch.Opponent</h3>
+                
+                <div class="display-4 fw-bold mb-3">
+                    @if (ViewBag.LastMatch.Result != null)
+                    {
+                        @ViewBag.LastMatch.Result
+                    }
+                    else
+                    {
+                        <span class="text-muted fst-italic">Все още не е изигран</span>
+                    }
+                </div>
+                
+                <span class="badge @(ViewBag.LastMatch.IsHomeGame ? "bg-primary" : "bg-warning") text-white fs-6">
+                    @(ViewBag.LastMatch.IsHomeGame ? "ДОМАКИН" : "ГОСТ")
+                </span>
+                
+                <div class="mt-4">
+                    <a asp-controller="Matches" asp-action="Index" class="btn btn-outline-dark btn-sm">Виж всички мачове</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>

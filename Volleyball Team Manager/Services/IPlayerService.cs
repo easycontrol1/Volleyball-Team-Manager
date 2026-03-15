@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VolleyballManager.Data.Models; // Този namespace трябва да ти е правилен
+using VolleyballManager.Data.Models;
 
 namespace VolleyballManager.Services
 {
@@ -8,5 +8,7 @@ namespace VolleyballManager.Services
         void AddPlayer(Player player);
         IEnumerable<Player> GetAllPlayers();
         Player GetById(int id);
+        void UpdatePlayer(Player player); // Това го имаш от редакцията
+        void DeletePlayer(int id);        // <-- ДОБАВИ ТОЗИ РЕД
     }
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VolleyballManager.Data;
 using VolleyballManager.Data.Models;
-using VolleyballManager.Data.Models;
-using VolleyballManager.Data;
 
 namespace VolleyballManager.Services 
 {
@@ -32,6 +30,33 @@ namespace VolleyballManager.Services
         public Player GetById(int id)
         {
             return context.Players.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void DeletePlayer(int id)
+        {
+            var player = context.Players.FirstOrDefault(p => p.Id == id);
+            if (player != null)
+            {
+                context.Players.Remove(player);
+                context.SaveChanges();
+            }
+        }
+        public void UpdatePlayer(Player player)
+        {
+            var dbPlayer = context.Players.FirstOrDefault(p => p.Id == player.Id);
+            if (dbPlayer != null)
+            {
+                dbPlayer.FirstName = player.FirstName;
+                dbPlayer.LastName = player.LastName;
+                dbPlayer.ShirtNumber = player.ShirtNumber;
+                dbPlayer.Position = player.Position;
+                dbPlayer.Height = player.Height;
+                dbPlayer.WingSpan = player.WingSpan;
+                dbPlayer.VerticalJump = player.VerticalJump;
+                dbPlayer.Age = player.Age;
+
+                context.SaveChanges();
+            }
         }
     }
 }

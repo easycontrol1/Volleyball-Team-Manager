@@ -1,0 +1,43 @@
+﻿@model VolleyballManager.Data.Models.Player
+
+@{
+    ViewData["Title"] = "Детайли за играча";
+}
+
+<div class="d-flex justify-content-center mt-5">
+    <div class="card shadow-lg" style="width: 40rem;">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Профил на играч</h4>
+            <span class="badge bg-light text-primary fs-5">#@Model.ShirtNumber</span>
+        </div>
+        <div class="card-body text-center">
+            
+            <!-- Аватар плейсхолдер (опционално) -->
+            <div class="mb-3">
+                <img src="https://via.placeholder.com/150/007bff/ffffff?text=@Model.FirstName[0]" class="rounded-circle border border-3 border-primary" alt="Avatar">
+            </div>
+
+            <h2 class="card-title fw-bold">@Model.FirstName @Model.LastName</h2>
+            <h5 class="card-subtitle mb-4 text-muted">@Model.Position</h5>
+
+            <div class="row g-0 text-start border-top pt-3">
+                <div class="col-6 p-2 border-end">
+                    <strong>Ръст:</strong> @Model.Height см
+                </div>
+                <div class="col-6 p-2">
+                    <strong>Възраст:</strong> @Model.Age години
+                </div>
+                <div class="col-6 p-2 border-end">
+                    <strong>Размах на ръцете:</strong> @Model.WingSpan см
+                </div>
+                <div class="col-6 p-2">
+                    <strong>Отскок:</strong> @Model.VerticalJump см
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-white d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">Назад към списъка</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Редактирай</a>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,32 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Volleyball_Team_Manager.Models;
+using VolleyballManager.Data; // Твоят namespace
 
-namespace Volleyball_Team_Manager.Controllers
+namespace VolleyballManager.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext context;
+
+        
+        public HomeController(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
+
         public IActionResult Index()
         {
+            
+            var playersCount = context.Players.Count();
+            var matchesCount = context.Matches.Count();
+
+            
+            var lastMatch = context.Matches.OrderByDescending(m => m.Date).FirstOrDefault();
+
+            
+            ViewBag.PlayersCount = playersCount;
+            ViewBag.MatchesCount = matchesCount;
+            ViewBag.LastMatch = lastMatch;
+
             return View();
         }
 
@@ -19,7 +38,7 @@ namespace Volleyball_Team_Manager.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View("Error!");
         }
     }
 }
