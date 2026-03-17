@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VolleyballManager.Data.Models;
 using VolleyballManager.Models;
-using VolleyballManager.Services; // <--- ПРОМЕНЕНО Е ОТ Services.Interfaces
+using VolleyballManager.Services;
 
 namespace VolleyballManager.Controllers
 {
@@ -30,12 +30,12 @@ namespace VolleyballManager.Controllers
                 OpponentName = match.Opponent
             };
 
-            // Взимаме всички играчи
+            
             var allPlayers = playerService.GetAllPlayers();
-            // Взимаме статистиката за този мач
+            
             var existingStats = statisticsService.GetStatisticsByMatch(matchId);
 
-            // Свързваме играчите със статистиката им (ако няма, правим нов празен запис)
+            
             viewModel.PlayerStats = allPlayers.Select(player =>
             {
                 var stat = existingStats.FirstOrDefault(s => s.PlayerId == player.Id);
@@ -78,12 +78,12 @@ namespace VolleyballManager.Controllers
             var match = matchService.GetById(matchId);
             if (match == null) return NotFound();
 
-            // Взимаме всички играчи
+            
             var allPlayers = playerService.GetAllPlayers();
-            // Взимаме статистиката за този мач
+            
             var existingStats = statisticsService.GetStatisticsByMatch(matchId);
 
-            // Подготовка на модела (същата логика като Index, но за четене)
+            
             var viewModel = new MatchStatisticsViewModel
             {
                 MatchId = match.Id,
@@ -95,7 +95,7 @@ namespace VolleyballManager.Controllers
                     {
                         PlayerId = player.Id,
                         MatchId = match.Id,
-                        Player = player, // Важно за имената
+                        Player = player,
                         ServicePoints = 0,
                         AttackPoints = 0,
                         BlockPoints = 0,
