@@ -49,6 +49,20 @@ namespace VolleyballManager.Controllers
 
             return View(player);
         }
+        // ТОВА Е МЕТОДЪТ ЗА ЗАПИС (POST)
+        [HttpPost]
+        public IActionResult Edit(Player player)
+        {
+            // Проверка дали полетата са попълнени правилно
+            if (ModelState.IsValid)
+            {
+                playerService.UpdatePlayer(player);
+                return RedirectToAction("Index");
+            }
+
+            // Ако има грешка, връщаме формата отново
+            return View(player);
+        }
 
         // Детайли
 

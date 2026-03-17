@@ -1,0 +1,76 @@
+﻿@model VolleyballManager.Models.MatchStatisticsViewModel
+
+@{
+    ViewData["Title"] = "Статистика за мач";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+            <h4>Въвеждане на статистика: @Model.OpponentName</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Save" method="post">
+                <!-- Скрито поле за MatchId -->
+                <input type="hidden" asp-for="MatchId" />
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Играч</th>
+                                <th>Точки (Атака)</th>
+                                <th>Асове</th>
+                                <th>Блокове</th>
+                                <th>Позитивни Приеми</th>
+                                <th>Грешки</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.PlayerStats.Count; i++)
+                            {
+                                <tr>
+                                    <!-- Скрити полета за връзка -->
+                                    <input type="hidden" asp-for="PlayerStats[i].PlayerId" />
+                                    <input type="hidden" asp-for="PlayerStats[i].MatchId" />
+                                    <input type="hidden" asp-for="PlayerStats[i].Id" />
+
+                                    <!-- Име на играча (само за четене) -->
+                                    <td>
+                                        <strong>
+                                            @Model.PlayerStats[i].Player?.FirstName @Model.PlayerStats[i].Player?.LastName
+                                            <br />
+                                            <small class="text-muted">№ @Model.PlayerStats[i].Player?.ShirtNumber</small>
+                                        </strong>
+                                    </td>
+
+                                    <!-- Полета за въвеждане -->
+                                    <td>
+                                        <input asp-for="PlayerStats[i].AttackPoints" class="form-control form-control-sm text-center" type="number" min="0" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="PlayerStats[i].ServicePoints" class="form-control form-control-sm text-center" type="number" min="0" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="PlayerStats[i].BlockPoints" class="form-control form-control-sm text-center" type="number" min="0" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="PlayerStats[i].PositiveReceptions" class="form-control form-control-sm text-center" type="number" min="0" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="PlayerStats[i].Errors" class="form-control form-control-sm text-center text-danger fw-bold" type="number" min="0" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-end mt-3">
+                    <a asp-controller="Matches" asp-action="Index" class="btn btn-secondary">Отказ</a>
+                    <button type="submit" class="btn btn-success btn-lg">Запиши статистиката</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

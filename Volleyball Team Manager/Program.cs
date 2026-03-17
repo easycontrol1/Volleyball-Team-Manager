@@ -33,6 +33,7 @@ builder.Services.AddControllersWithViews(options =>
 // Регистрация на вашите сервизи
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IMatchService, MatchService>();
+builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 
 var app = builder.Build();
 
