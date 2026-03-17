@@ -66,10 +66,46 @@ namespace VolleyballManager.Controllers
                 {
                     statisticsService.AddStatistic(stat);
                 }
-                return RedirectToAction("Index", "Matches");
+                return RedirectToAction("Details", new { matchId = model.MatchId });
             }
 
             return View("Index", model);
+        }
+        // 3. ПРОГЛЕД НА СТАТИСТИКАТА (Details)
+        
+        public IActionResult Details(int matchId)
+        {
+            var match = matchService.GetById(matchId);
+            if (match == null) return NotFound();
+
+            // Взимаме всички играчи
+            var allPlayers = playerService.GetAllPlayers();
+            // Взимаме статистиката за този мач
+            var existingStats = statisticsService.GetStatisticsByMatch(matchId);
+
+            // Подготовка на модела (същата логика като Index, но за четене)
+            var viewModel = new MatchStatisticsViewModel
+            {
+                MatchId = match.Id,
+                OpponentName = match.Opponent,
+                PlayerStats = allPlayers.Select(player =>
+                {
+                    var stat = existingStats.FirstOrDefault(s => s.PlayerId == player.Id);
+                    return stat ?? new PlayerStatistic
+                    {
+                        PlayerId = player.Id,
+                        MatchId = match.Id,
+                        Player = player, // Важно за имената
+                        ServicePoints = 0,
+                        AttackPoints = 0,
+                        BlockPoints = 0,
+                        PositiveReceptions = 0,
+                        Errors = 0
+                    };
+                }).ToList()
+            };
+
+            return View(viewModel);
         }
     }
 }

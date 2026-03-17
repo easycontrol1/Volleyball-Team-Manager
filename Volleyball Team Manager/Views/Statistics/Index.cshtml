@@ -11,6 +11,10 @@
         </div>
         <div class="card-body">
             <form asp-action="Save" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    
+                   
                 <!-- Скрито поле за MatchId -->
                 <input type="hidden" asp-for="MatchId" />
 

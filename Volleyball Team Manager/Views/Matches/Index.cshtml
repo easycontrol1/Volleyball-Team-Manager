@@ -30,7 +30,17 @@
                 <div class="card-body text-center">
                     <h5 class="card-title mb-3">Противник: @item.Opponent</h5>
                     <div class="display-4 fw-bold text-dark mb-3">@item.Result</div>
-                    <a asp-controller="Statistics" asp-action="Index" asp-route-matchId="@item.Id" class="btn btn-outline-dark btn-sm w-100">Виж статистика</a>
+                    <div class="btn-group w-100" role="group" aria-label="Статистика">
+                        
+                        <a asp-controller="Statistics" asp-action="Details" asp-route-matchId="@item.Id" class="btn btn-outline-info btn-sm">
+                            👁️ Преглед
+                        </a>
+    
+                        
+                        <a asp-controller="Statistics" asp-action="Index" asp-route-matchId="@item.Id" class="btn btn-primary btn-sm">
+                            ✏️ Редактиране
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,69 @@
+﻿@model VolleyballManager.Models.MatchStatisticsViewModel
+
+@{
+    ViewData["Title"] = "Статистика: " + Model.OpponentName;
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <h4>🏆 Статистика за мач: @Model.OpponentName</h4>
+            <a asp-controller="Matches" asp-action="Index" class="btn btn-light text-success btn-sm">Затвори</a>
+        </div>
+        <div class="card-body">
+            
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Играч</th>
+                            <th class="text-center">Точки (Атака)</th>
+                            <th class="text-center">Асове</th>
+                            <th class="text-center">Блокове</th>
+                            <th class="text-center">Позитивни Приеми</th>
+                            <th class="text-center">Грешки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var stat in Model.PlayerStats)
+                        {
+                            <tr>
+                                <td>
+                                    <strong class="fs-5">
+                                        @stat.Player.FirstName @stat.Player.LastName
+                                        <span class="badge bg-secondary ms-2">#@stat.Player.ShirtNumber</span>
+                                    </strong>
+                                </td>
+                                <td class="text-center fs-5 fw-bold text-primary">@stat.AttackPoints</td>
+                                <td class="text-center fs-5">@stat.ServicePoints</td>
+                                <td class="text-center fs-5">@stat.BlockPoints</td>
+                                <td class="text-center fs-5">@stat.PositiveReceptions</td>
+                                <td class="text-center fs-5 text-danger fw-bold">@stat.Errors</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-light fw-bold">
+                        <tr>
+                            <td>ОБЩО</td>
+                            <td class="text-center">@Model.PlayerStats.Sum(x => x.AttackPoints)</td>
+                            <td class="text-center">@Model.PlayerStats.Sum(x => x.ServicePoints)</td>
+                            <td class="text-center">@Model.PlayerStats.Sum(x => x.BlockPoints)</td>
+                            <td class="text-center">@Model.PlayerStats.Sum(x => x.PositiveReceptions)</td>
+                            <td class="text-center">@Model.PlayerStats.Sum(x => x.Errors)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="mt-4 text-end">
+                <!-- Бутон за връщане към редакция, ако трябва да се поправи нещо -->
+                <a asp-action="Index" asp-route-matchId="@Model.MatchId" class="btn btn-outline-warning">
+                    ✏️ Редактирай статистиката
+                </a>
+                <a asp-controller="Matches" asp-action="Index" class="btn btn-secondary ms-2">
+                    Към мачовете
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
