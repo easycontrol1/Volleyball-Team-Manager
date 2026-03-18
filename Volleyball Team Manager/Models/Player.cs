@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace VolleyballManager.Data.Models
 {
     public class Player
@@ -21,13 +22,18 @@ namespace VolleyballManager.Data.Models
 
         [Required(ErrorMessage = "Изберете позиция!")]
         [StringLength(20)]
-        public string Position { get; set; }
+        public string Position { set; get; }
 
         [Range(150, 250, ErrorMessage = "Ръстът трябва да е между 150 и 250 см.")]
         public int Height { get; set; }
 
+        [Range(150, 350, ErrorMessage = "Размахът трябва да е между 150 и 350 см.")]
         public int WingSpan { get; set; }
+
+        [Range(20, 130, ErrorMessage = "Скокът трябва да е между 20 и 130 см.")]
         public int VerticalJump { get; set; }
+
+        [Range(10, 60, ErrorMessage = "Възрастта трябва да е между 10 и 60 години.")]
         public int Age { get; set; }
     }
 }

@@ -29,14 +29,17 @@ namespace VolleyballManager.Controllers
         [HttpPost]
         public IActionResult Create(Player player)
         {
-            if (ModelState.IsValid)
+            
+            if (!ModelState.IsValid)
             {
-                playerService.AddPlayer(player);
-                return RedirectToAction("Index");
+                
+                return View(player);
             }
-            return View(player);
-        }
 
+            
+            playerService.AddPlayer(player);
+            return RedirectToAction("Index");
+        }
         // Редакция
         public IActionResult Edit(int id)
         {

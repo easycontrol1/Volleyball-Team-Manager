@@ -7,7 +7,6 @@
 <div class="container mt-4">
     <h1 class="mb-4 text-primary">🔐 Административен Панел</h1>
 
-    <!-- КАРТИ ЗА СТАТИСТИКА -->
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="card text-white bg-primary mb-3 shadow-sm">
@@ -44,7 +43,6 @@
     </div>
 
     <div class="row">
-        <!-- КОЛОНА С ДЕЙСТВИЯ -->
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm h-100">
                 <div class="card-header bg-light fw-bold">Бързи Действия</div>
@@ -65,7 +63,6 @@
             </div>
         </div>
 
-        <!-- КОЛОНА С ПОТРЕБИТЕЛИ -->
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
@@ -88,7 +85,7 @@
                                     <td>@user.Email</td>
                                     <td><small class="text-muted">@user.Id</small></td>
                                     <td class="text-end">
-                                        @if (user.Email != "admin@vm.bg") // Предпазваме админа от изтриване
+                                        @if (user.Email != "admin@vm.bg") 
                                         {
                                             <form asp-action="DeleteUser" method="post" class="d-inline">
                                                 <input type="hidden" name="userId" value="@user.Id" />

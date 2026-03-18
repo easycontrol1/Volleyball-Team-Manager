@@ -15,7 +15,6 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
     
                    
-                <!-- Скрито поле за MatchId -->
                 <input type="hidden" asp-for="MatchId" />
 
                 <div class="table-responsive">
@@ -34,12 +33,10 @@
                             @for (int i = 0; i < Model.PlayerStats.Count; i++)
                             {
                                 <tr>
-                                    <!-- Скрити полета за връзка -->
                                     <input type="hidden" asp-for="PlayerStats[i].PlayerId" />
                                     <input type="hidden" asp-for="PlayerStats[i].MatchId" />
                                     <input type="hidden" asp-for="PlayerStats[i].Id" />
 
-                                    <!-- Име на играча (само за четене) -->
                                     <td>
                                         <strong>
                                             @Model.PlayerStats[i].Player?.FirstName @Model.PlayerStats[i].Player?.LastName
@@ -48,7 +45,6 @@
                                         </strong>
                                     </td>
 
-                                    <!-- Полета за въвеждане -->
                                     <td>
                                         <input asp-for="PlayerStats[i].AttackPoints" class="form-control form-control-sm text-center" type="number" min="0" />
                                     </td>

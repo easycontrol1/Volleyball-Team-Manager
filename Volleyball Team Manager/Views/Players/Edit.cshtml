@@ -14,19 +14,21 @@
             </div>
             <div class="card-body">
                 <form asp-action="Edit">
-                    <!-- Това скрива Id-то, за да знае базата кого ъпдейтва -->
+                   
                     <input type="hidden" asp-for="Id" />
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
                     
                     <div class="row mb-3">
                         <div class="col">
                             <label asp-for="FirstName" class="form-label">Име</label>
                             <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <label asp-for="LastName" class="form-label">Фамилия</label>
                             <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -34,20 +36,24 @@
                         <div class="col-md-4">
                             <label asp-for="ShirtNumber" class="form-label">Номер</label>
                             <input asp-for="ShirtNumber" type="number" class="form-control" />
+                            <span asp-validation-for="ShirtNumber" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="Age" class="form-label">Възраст</label>
                             <input asp-for="Age" type="number" class="form-control" />
+                            <span asp-validation-for="Age" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="Position" class="form-label">Позиция</label>
                             <select asp-for="Position" class="form-select">
+                                <option value="">Избери...</option> 
                                 <option value="Setter">Разпределител</option>
                                 <option value="Outside Hitter">Посрещач</option>
                                 <option value="Middle Blocker">Централен</option>
                                 <option value="Opposite">Диагонал</option>
                                 <option value="Libero">Либеро</option>
                             </select>
+                            <span asp-validation-for="Position" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -55,21 +61,24 @@
                         <div class="col-md-4">
                             <label asp-for="Height" class="form-label">Ръст (см)</label>
                             <input asp-for="Height" type="number" class="form-control" />
+                            <span asp-validation-for="Height" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="WingSpan" class="form-label">Размах (см)</label>
                             <input asp-for="WingSpan" type="number" class="form-control" />
+                            <span asp-validation-for="WingSpan" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="VerticalJump" class="form-label">Скок (см)</label>
                             <input asp-for="VerticalJump" type="number" class="form-control" />
+                            <span asp-validation-for="VerticalJump" class="text-danger"></span>
                         </div>
                     </div>
 
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-between mt-4">
                         
-                        <!-- ОТЛЯВО: Изтрий -->
+                        
                         <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
                             🗑️ Изтрий играча
                         </a>
@@ -81,7 +90,7 @@
                         </div>
 
                     </div>
-                    <!-- КРАЙ НА БУТОНИТЕ -->
+                    
                     
                 </form>
             </div>
