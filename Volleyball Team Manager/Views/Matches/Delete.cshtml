@@ -1,0 +1,41 @@
+﻿@model VolleyballManager.Data.Models.Match
+
+@{
+    ViewData["Title"] = "Изтриване на мач";
+}
+
+<div class="container mt-5">
+    <h3 class="text-danger">Сигурни ли сте?</h3>
+    <p>Желаете ли да изтриете мача срещу <strong>@Model.Opponent</strong>?</p>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Дата:</dt>
+                <dd class="col-sm-9">@Model.Date?.ToString("dd.MM.yyyy")</dd>
+
+                <dt class="col-sm-3">Резултат:</dt>
+                <dd class="col-sm-9">@Model.Result</dd>
+
+                <dt class="col-sm-3">Терминал:</dt>
+                <dd class="col-sm-9">
+                    @if (Model.IsHomeGame)
+                    {
+                        <span>Домакин</span>
+                    }
+                    else
+                    {
+
+                        <span>Гост</span>
+                    }
+                </dd>
+            </dl>
+
+            <form asp-action="DeleteConfirmed">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Да, изтрий" class="btn btn-danger" /> |
+                <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+            </form>
+        </div>
+    </div>
+</div>

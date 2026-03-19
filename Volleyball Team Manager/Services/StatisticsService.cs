@@ -17,13 +17,13 @@ namespace VolleyballManager.Services
 
         public void AddStatistic(PlayerStatistic statistic)
         {
-            
+            statistic.Player = null;
+
             var existing = context.PlayerStatistics
                 .FirstOrDefault(x => x.MatchId == statistic.MatchId && x.PlayerId == statistic.PlayerId);
 
             if (existing != null)
             {
-                
                 existing.ServicePoints = statistic.ServicePoints;
                 existing.AttackPoints = statistic.AttackPoints;
                 existing.BlockPoints = statistic.BlockPoints;
@@ -32,9 +32,9 @@ namespace VolleyballManager.Services
             }
             else
             {
-                
                 context.PlayerStatistics.Add(statistic);
             }
+
             context.SaveChanges();
         }
 
@@ -46,5 +46,6 @@ namespace VolleyballManager.Services
                 .Where(x => x.MatchId == matchId)
                 .ToList();
         }
+
     }
 }

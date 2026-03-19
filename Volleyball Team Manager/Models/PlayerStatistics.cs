@@ -14,7 +14,7 @@ namespace VolleyballManager.Data.Models
 
         // Навигационно свойство (за лесно достъпване на данните от играча)
         [ForeignKey(nameof(PlayerId))]
-        public Player Player { get; set; }
+        public Player? Player { get; set; }
 
         // Връзка с Мача (Foreign Key)
         [Required]
@@ -22,7 +22,7 @@ namespace VolleyballManager.Data.Models
 
         // Навигационно свойство (за лесно достъпване на данните от мача)
         [ForeignKey(nameof(MatchId))]
-        public Match Match { get; set; }
+        public Match? Match { get; set; }
 
         // --- Данни за статистиката ---
 

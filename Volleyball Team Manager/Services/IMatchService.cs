@@ -8,5 +8,7 @@ namespace VolleyballManager.Services
         void AddMatch(Match match);
         IEnumerable<Match> GetAllMatches();
         Match GetById(int id);
+        void UpdateMatch(Match match);
+        void DeleteMatch(int id);
     }
 }

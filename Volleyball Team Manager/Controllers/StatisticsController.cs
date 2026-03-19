@@ -60,19 +60,30 @@ namespace VolleyballManager.Controllers
         [HttpPost]
         public IActionResult Save(MatchStatisticsViewModel model)
         {
-            if (ModelState.IsValid)
+            // --- ИНСТРУМЕНТ ЗА НАМЕРЯВАНЕ НА ГРЕШКАТА ---
+            if (!ModelState.IsValid)
             {
-                foreach (var stat in model.PlayerStats)
-                {
-                    statisticsService.AddStatistic(stat);
-                }
-                return RedirectToAction("Details", new { matchId = model.MatchId });
-            }
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
 
-            return View("Index", model);
+                // Това ще изпише на екрана конкретната грешка
+                return Content(
+                    $"ВАЛИДАЦИЯТА СЕ ПРОВАЛИ! \n\n" +
+                    $"Причина: {string.Join(", ", errors)} \n\n" +
+                    $"MatchId: {model.MatchId} \n" +
+                    $"Брой играчи: {model.PlayerStats.Count}"
+                );
+            }
+            // --------------------------------------------------
+
+            // Това се изпълнява само ако всичко е наред
+            foreach (var stat in model.PlayerStats)
+            {
+                statisticsService.AddStatistic(stat);
+            }
+            return RedirectToAction("Details", new { matchId = model.MatchId });
         }
         // 3. ПРОГЛЕД НА СТАТИСТИКАТА (Details)
-        
+
         public IActionResult Details(int matchId)
         {
             var match = matchService.GetById(matchId);

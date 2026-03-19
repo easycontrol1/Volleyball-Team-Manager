@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using VolleyballManager.Data.Models;
 using VolleyballManager.Data;
+using VolleyballManager.Data.Models;
 
 namespace VolleyballManager.Services
 {
@@ -23,13 +23,37 @@ namespace VolleyballManager.Services
 
         public IEnumerable<Match> GetAllMatches()
         {
-            // Подреждаме мачовете по дата (най-новите най-отгоре)
             return context.Matches.OrderByDescending(m => m.Date).ToList();
         }
 
         public Match GetById(int id)
         {
             return context.Matches.FirstOrDefault(m => m.Id == id);
+        }
+
+        // --- НОВИ МЕТОДИ ---
+
+        public void UpdateMatch(Match match)
+        {
+            var dbMatch = context.Matches.FirstOrDefault(m => m.Id == match.Id);
+            if (dbMatch != null)
+            {
+                dbMatch.Date = match.Date;
+                dbMatch.Opponent = match.Opponent;
+                dbMatch.Result = match.Result;
+                dbMatch.IsHomeGame = match.IsHomeGame;
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteMatch(int id)
+        {
+            var match = context.Matches.FirstOrDefault(m => m.Id == id);
+            if (match != null)
+            {
+                context.Matches.Remove(match);
+                context.SaveChanges();
+            }
         }
     }
 }

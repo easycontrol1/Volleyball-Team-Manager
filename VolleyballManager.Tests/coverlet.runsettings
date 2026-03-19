@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="Code Coverage" enabled="true">
+				<Configuration>
+					<CodeCoverage>
+						<ModulePaths>
+							<Include>
+								<ModulePath>VolleyballManager.dll</ModulePath>
+							</Include>
+						</ModulePaths>
+
+						<Functions>
+							<Exclude>
+								<Function>.*\.Areas\..*</Function>
+								<Function>.*\.Views\..*</Function>
+								<Function>.*\.Migrations\..*</Function>
+								<Function>.*\.Data\.ApplicationDbContext.*</Function>
+							</Exclude>
+						</Functions>
+
+						<Attributes>
+							<Exclude>
+								<Attribute>System.CodeDom.Compiler.GeneratedCodeAttribute</Attribute>
+								<Attribute>System.Diagnostics.CodeAnalysis.GeneratedCodeAttribute</Attribute>
+							</Exclude>
+						</Attributes>
+
+					</CodeCoverage>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>
