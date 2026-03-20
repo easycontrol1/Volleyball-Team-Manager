@@ -11,7 +11,6 @@ namespace VolleyballManager.Tests
         [Test]
         public void Match_WithValidData_ShouldPass()
         {
-            // Валидна дата като текст, за да избегнем грешки в атрибута
             var match = new Match
             {
                 Date = DateTime.Parse("2024-05-20"),
@@ -23,14 +22,15 @@ namespace VolleyballManager.Tests
             Assert.IsEmpty(results);
         }
 
-        // ТУК ПОДАВАМЕ ДАТАТА КАЛО ТЕКСТ (String)
         // 1. Празен текст за Липсваща Дата
         [TestCase("", "Левски", "3:0", "Липсва Дата")]
 
         // 2. Валидна дата, но NULL за Противник
         [TestCase("2024-01-01", null, "3:0", "Липсва Противник")]
+        [TestCase("2024-01-01", "Лубе", null, "Липсва Резултат")]
 
-        public void Match_WithInvalidData_ShouldFail(string dateString, string? opponent, string result, string errorMessage)
+
+        public void Match_WithInvalidData_ShouldFail(string dateString, string? opponent, string? result, string errorMessage)
         {
             DateTime? date = null; // По подразбиране е null (това ще хване грешката)
 
@@ -39,7 +39,6 @@ namespace VolleyballManager.Tests
                 DateTime.TryParse(dateString, out DateTime parsedDate);
                 date = parsedDate;
             }
-            // Ако е празен, остава null.
 
             var match = new Match
             {
